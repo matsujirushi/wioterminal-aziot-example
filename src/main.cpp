@@ -405,6 +405,8 @@ static void MqttSubscribeCallbackHub(char* topic, byte* payload, unsigned int le
 ////////////////////////////////////////////////////////////////////////////////
 // setup and loop
 
+static auto FlashWallpaperAddress = reinterpret_cast<const uint8_t* const>(0x04200000);
+
 void setup()
 {
     ////////////////////
@@ -430,6 +432,9 @@ void setup()
     tft.setTextScroll(true);
     tft.setTextColor(TFT_WHITE);
     tft.setFont(&fonts::Font2);
+
+    tft.pushImage(0, 0, 320, 240, (const uint16_t*)FlashWallpaperAddress);
+    delay(3000);
 
     ////////////////////
     // Enter configuration mode
